@@ -10,8 +10,6 @@ export default new Router({
     {
       path: "/",
       redirect: "/quiz"
-      //   name: "HelloWorld",
-      //   component: HelloWorld
     },
     {
       path: "/quiz",
