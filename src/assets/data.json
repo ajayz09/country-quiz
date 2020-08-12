@@ -1,0 +1,35 @@
+[
+  {
+    "question": "Fakaofo is the capital of",
+    "options": [
+      { "value": "Andorra" },
+      { "value": "Tokelau" },
+      { "value": "Brazil" },
+      { "value": "Antigua and Barbuda" }
+    ],
+    "answer": "Tokelau",
+    "flag": false
+  },
+  {
+    "question": "Willemstad is the capital of",
+    "options": [
+      { "value": "Japan" },
+      { "value": "Chile" },
+      { "value": "Curacao" },
+      { "value": "South Georgia" }
+    ],
+    "answer": "Curacao",
+    "flag": false
+  },
+  {
+    "question": "Which country does this flag belong to?",
+    "options": [
+      { "value": "Albania" },
+      { "value": "Romania" },
+      { "value": "Armenia" },
+      { "value": "Bulgaria" }
+    ],
+    "answer": "Albania",
+    "flag": "https://restcountries.eu/data/alb.svg"
+  }
+]
