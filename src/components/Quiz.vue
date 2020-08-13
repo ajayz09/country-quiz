@@ -4,7 +4,7 @@
     <div class="quiz-card">
       <md-card md-with-hover>
         <md-card-media v-if="question.flag" style="height:50px;width:100px;margin:20px 0 0 20px;">
-          <img v-bind:src="question.flag" alt="People">
+          <img v-bind:src="question.flag" alt="Flag">
         </md-card-media>
         <md-card-header>
           <div class="md-title">{{ question.question }}</div>
@@ -15,7 +15,7 @@
             <md-button
               class="md-flat option-btn"
               v-on:click="clickedOption(index)"
-              v-bind:class="{correct: correctAnswer && index==clickedIndex || incorrectAnswer, wrong: incorrectAnswer && index == clickedIndex}"
+              v-bind:class="{correct:  clickedAnswer && index==correctIndex , wrong: incorrectAnswer && index == clickedIndex}"
             >
               <div>
                 <span style="float:left;">{{ alphabets[index] }}</span>
@@ -23,8 +23,15 @@
                 <span
                   style="float:right;font-size: 16px;"
                   class="material-icons correct-ans"
-                  v-if="clickedAnswer && index==clickedIndex "
-                >{{displayIcon}}</span>
+                  v-if="clickedAnswer && index==clickedIndex"
+                  v-bind:class="{hide: clickedAnswer && index==correctIndex}"
+                >highlight_off</span>
+                <span
+                  style="float:right;font-size: 16px;"
+                  class="material-icons correct-ans"
+                  v-if="clickedAnswer && index==correctIndex"
+                  v-bind:class="{hide: incorrectAnswer && index == clickedIndex}"
+                >check_circle_outline</span>
               </div>
             </md-button>
           </div>
@@ -54,10 +61,11 @@ export default {
       question: [],
       randomNumber: "",
       count: 0,
+      correctAnswerCount: 0,
       clickedIndex: "",
+      correctIndex: "-1",
       correctAnswer: false,
-      incorrectAnswer: false,
-      displayIcon: ""
+      incorrectAnswer: false
     };
   },
   created() {
@@ -68,28 +76,39 @@ export default {
     this.question = this.questionsArray[this.randomNumber];
   },
   methods: {
+    getCorrectIndex(currentQuestion) {
+      var index = "-1";
+      var filteredResults = currentQuestion.options.find(function(item, i) {
+        if (item.value === currentQuestion.answer) {
+          index = i;
+          return i;
+        }
+      });
+      if (index != "-1") {
+        return index;
+      }
+    },
     clickedOption(index) {
       if (!this.clickedAnswer) {
         this.clickedAnswer = true;
+        this.correctIndex = this.getCorrectIndex(this.question);
+
         this.clickedIndex = index;
         if (this.question.options[index].value == this.question.answer) {
-          console.log("Correct Answer Pressed");
           this.correctAnswer = true;
-          this.displayIcon = "check_circle_outline";
+          this.correctAnswerCount = this.correctAnswerCount + 1;
         } else {
           this.incorrectAnswer = true;
-          this.displayIcon = "highlight_off";
-          console.log("Wrong Answer Pressed");
         }
-        console.log(this.correctAnswer);
-        console.log(this.incorrectAnswer);
       }
     },
 
     getRandomQuestion(number) {
       return Math.floor(Math.random() * number);
     },
+
     clearData() {
+      this.correctIndex = "-1";
       this.clickedIndex = "";
       this.clickedAnswer = false;
       this.correctAnswer = false;
@@ -139,7 +158,7 @@ export default {
 }
 
 .next-btn {
-  color: black;
+  color: white;
   background-color: #faa827 !important ;
   border-radius: 10px !important;
   margin: -15px 20px 20px 0px !important;
@@ -165,5 +184,10 @@ export default {
   background-color: #ea8282 !important;
   border: none !important;
   color: white;
+}
+
+.hide {
+  visibility: hidden !important;
+  width: 0 !important;
 }
 </style>
