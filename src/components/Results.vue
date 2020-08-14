@@ -1,11 +1,11 @@
 <template>
   <div class="quiz-card">
-    <md-card md-with-hover>
+    <md-card md-with-hover id="results-card">
       <md-card-media style="margin: 20px 50px 0 50px;">
         <img src="../assets/undraw_winners.svg" alt="Flag">
       </md-card-media>
       <md-card-header>
-        <div class="md-title">Results</div>
+        <div class="md-title" id="results-title">Results</div>
       </md-card-header>
 
       <md-card-content>
@@ -19,7 +19,7 @@
       </md-card-content>
 
       <md-card-actions>
-        <md-button class="md-flat try-again-btn" v-on:click="tryAgain()">Try again</md-button>
+        <md-button class="md-flat" id="try-again-btn" v-on:click="tryAgain()">Try again</md-button>
       </md-card-actions>
     </md-card>
   </div>
@@ -35,8 +35,6 @@ export default {
   methods: {
     tryAgain() {
       console.log("Clicked Try Again");
-      // this.$router.push("/");
-      // debugger;
       let count = 0;
       this.$emit("clicked", count);
     }
@@ -46,26 +44,32 @@ export default {
 
 
 <style >
-.md-card {
+#results-card {
   background: white;
-  min-width: 320px;
+  min-width: 370px;
   max-width: 400px;
   margin: 4px;
   display: inline-block;
   vertical-align: top;
-  border-radius: 20px !important;
+  border-radius: 20px;
 }
 
-.md-title {
-  font-weight: 900 !important;
+#results-title {
+  font-weight: 900;
   text-align: center;
 }
 
-.try-again-btn {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  border: 1px solid black !important;
-  border-radius: 10px !important;
-  margin-bottom: 16px !important;
+#try-again-btn {
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+#try-again-btn:hover {
+  border: none !important;
+  background-color: #faa827;
+  color: white;
 }
 </style>

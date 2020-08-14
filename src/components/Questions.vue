@@ -1,11 +1,24 @@
 <template>
   <div class="quiz-card">
-    <md-card md-with-hover class="quiz-ques" v-if="count < 5">
-      <md-card-media class="md-card-image" v-if="question.flag">
-        <img v-bind:src="question.flag" alt="Flag">
+    <md-card md-with-hover id="quiz-ques-card" v-if="count < 5">
+      <md-card-media class="md-card-image">
+        <div>
+          <img
+            src="../assets/undraw_adventure.svg"
+            style="right:0;top:-100px;height:150px;width:150px;position:absolute;"
+            alt="Adventure"
+          >
+        </div>
+        <div id="country-flag" v-if="question.flag">
+          <img v-bind:src="question.flag" alt="Flag">
+        </div>
       </md-card-media>
       <md-card-header>
-        <div class="md-title">{{ question.question }}</div>
+        <div
+          class="md-title"
+          id="ques-title"
+          v-bind:class="{questiontitle: !question.flag}"
+        >{{ question.question }}</div>
       </md-card-header>
 
       <md-card-content>
@@ -36,7 +49,7 @@
       </md-card-content>
 
       <md-card-actions v-if="clickedAnswer">
-        <md-button class="md-flat next-btn" v-on:click="getNextQuestion()">Next</md-button>
+        <md-button class="md-flat" id="next-btn" v-on:click="getNextQuestion()">Next</md-button>
       </md-card-actions>
     </md-card>
     <Results
@@ -150,32 +163,39 @@ export default {
 </script>
 
 
-<style scopped>
-.quiz-content h1 {
-  float: left;
-  font-weight: 900 !important;
-  color: white;
-}
-
-.md-card {
+<style>
+#quiz-ques-card {
   background: white;
-  min-width: 320px;
+  min-width: 370px;
   max-width: 400px;
   margin: 4px;
   display: inline-block;
   vertical-align: top;
-  border-radius: 20px !important;
+  border-radius: 20px;
 }
 
-.md-card-image {
+#country-flag {
   height: 50px;
-  width: 100px;
+  width: 80px;
   margin: 20px 0 0 20px;
+  object-fit: contain;
 }
 
-.md-title {
-  font-weight: 700 !important;
+#country-flag img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block;
+  border: 1px solid grey;
+}
+#ques-title {
+  /* margin-top: 20px; */
+  font-weight: 700;
   text-align: left;
+}
+
+.questiontitle {
+  margin-top: 20px !important;
 }
 
 .option-btn {
@@ -185,11 +205,11 @@ export default {
   border-radius: 10px !important;
 }
 
-.next-btn {
+#next-btn {
   color: white;
-  background-color: #faa827 !important ;
-  border-radius: 10px !important;
-  margin: -15px 20px 20px 0px !important;
+  background-color: #faa827;
+  border-radius: 10px;
+  margin: -15px 20px 20px 0px;
 }
 
 .option-btn:hover {
