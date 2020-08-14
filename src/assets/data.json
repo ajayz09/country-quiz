@@ -31,5 +31,82 @@
     ],
     "answer": "Albania",
     "flag": "https://restcountries.eu/data/alb.svg"
+  },
+  {
+    "question": "Which country does this flag belong to?",
+    "options": [
+      { "value": "Norfolk Island" },
+      { "value": "Tokelau" },
+      { "value": "Wallis and Futuna" },
+      { "value": "American Samoa" }
+    ],
+    "answer": "American Samoa",
+    "flag": "https://restcountries.eu/data/asm.svg"
+  },
+  {
+    "question": "Which country does this flag belong to?",
+    "options": [
+      { "value": "Ethiopia" },
+      { "value": "Egypt" },
+      { "value": "Angola" },
+      { "value": "Nigeria" }
+    ],
+    "answer": "Angola",
+    "flag": "https://restcountries.eu/data/ago.svg"
+  },
+  {
+    "question": "Which country does this flag belong to?",
+    "options": [
+      { "value": "Ethiopia" },
+      { "value": "Lebanon" },
+      { "value": "Uganda" },
+      { "value": "Georgia" }
+    ],
+    "answer": "Lebanon",
+    "flag": "https://restcountries.eu/data/lbn.svg"
+  },
+  {
+    "question": "Which country does this flag belong to?",
+    "options": [
+      { "value": "Belgium" },
+      { "value": "Germany" },
+      { "value": "Ghana" },
+      { "value": "Romania" }
+    ],
+    "answer": "Belgium",
+    "flag": "https://restcountries.eu/data/bel.svg"
+  },
+  {
+    "question": "The capital of Switzerland is?",
+    "options": [
+      { "value": "Geneva" },
+      { "value": "Bern" },
+      { "value": "Zürich" },
+      { "value": "Basel" }
+    ],
+    "answer": "Bern",
+    "flag": false
+  },
+  {
+    "question": "The capital of Brazil is?",
+    "options": [
+      { "value": "Rio de Janeiro" },
+      { "value": "São Paulo" },
+      { "value": "Brasilia" },
+      { "value": "Salvador" }
+    ],
+    "answer": "Brasilia",
+    "flag": false
+  },
+  {
+    "question": "The capital of Morocco is?",
+    "options": [
+      { "value": "Marrakesh" },
+      { "value": "Casablanca" },
+      { "value": "Rabat" },
+      { "value": "Fes" }
+    ],
+    "answer": "Rabat",
+    "flag": false
   }
 ]
