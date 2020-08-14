@@ -1,6 +1,6 @@
 <template>
   <div class="quiz-card">
-    <md-card md-with-hover>
+    <md-card md-with-hover class="quiz-ques" v-if="count < 5">
       <md-card-media class="md-card-image" v-if="question.flag">
         <img v-bind:src="question.flag" alt="Flag">
       </md-card-media>
@@ -39,38 +39,51 @@
         <md-button class="md-flat next-btn" v-on:click="getNextQuestion()">Next</md-button>
       </md-card-actions>
     </md-card>
+    <Results
+      v-if="count == 5"
+      v-bind:correctAnswerCount="correctAnswerCount"
+      @clicked="onClickChild"
+    ></Results>
   </div>
 </template>
 
 <script>
 import json from "../assets/data.json";
+import Results from "./Results.vue";
+
+function initialState() {
+  console.log("Initial State");
+  return {
+    alphabets: ["A.", "B.", "C.", "D."],
+    clickedAnswer: false,
+    questionsArray: json,
+    question: [],
+    randomNumber: "",
+    count: 0,
+    correctAnswerCount: 0,
+    clickedIndex: "",
+    correctIndex: "-1",
+    correctAnswer: false,
+    incorrectAnswer: false
+  };
+}
 
 export default {
   name: "Questions",
   props: {
     msg: String
   },
+  components: {
+    Results
+  },
+
   data() {
-    return {
-      alphabets: ["A.", "B.", "C.", "D."],
-      clickedAnswer: false,
-      questionsArray: json,
-      question: [],
-      randomNumber: "",
-      count: 0,
-      correctAnswerCount: 0,
-      clickedIndex: "",
-      correctIndex: "-1",
-      correctAnswer: false,
-      incorrectAnswer: false
-    };
+    return initialState();
   },
   created() {
     console.log("Created");
-    this.randomNumber = this.getRandomQuestion(
-      Object.keys(this.questionsArray).length
-    );
-    this.question = this.questionsArray[this.randomNumber];
+    console.log(this.$route.path);
+    this.getRandomQuestion();
   },
   methods: {
     getCorrectIndex(currentQuestion) {
@@ -100,8 +113,10 @@ export default {
       }
     },
 
-    getRandomQuestion(number) {
-      return Math.floor(Math.random() * number);
+    getRandomQuestion() {
+      let number = Object.keys(this.questionsArray).length;
+      this.randomNumber = Math.floor(Math.random() * number);
+      this.question = this.questionsArray[this.randomNumber];
     },
 
     clearData() {
@@ -112,18 +127,23 @@ export default {
       this.incorrectAnswer = false;
     },
     getNextQuestion() {
-      if (this.count < 4) {
-        this.count = this.count + 1;
+      this.count = this.count + 1;
+      if (this.count < 5) {
         console.log(this.count);
-        this.randomNumber = this.getRandomQuestion(
-          Object.keys(this.questionsArray).length
-        );
-        this.question = this.questionsArray[this.randomNumber];
+        this.getRandomQuestion();
         this.clearData();
       } else {
+        console.log(this.count);
         console.log("Your Scored ", this.correctAnswerCount, "out of 5 tries");
-        this.$router.push("Results");
       }
+    },
+    resetWindow() {
+      Object.assign(this.$data, initialState());
+      this.getRandomQuestion();
+    },
+    onClickChild(value) {
+      this.count = value;
+      this.resetWindow();
     }
   }
 };
